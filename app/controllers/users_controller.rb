@@ -4,11 +4,14 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(index show destroy)
   
+
   def index
     @users = User.paginate(page: params[:page])
   end
   
   def show
+    @first_day = Date.current.beginning_of_month
+    @last_day = @first_day.end_of_month
   end
   
   def new
@@ -30,7 +33,6 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "アカウント情報を更新しました。"
       redirect_to @user
