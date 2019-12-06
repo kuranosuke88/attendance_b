@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   
   resources :users do
-   resources :attendances, only: :update
- end
+    member do
+      get 'attendances/edit_one_month'
+      patch 'attendances/update_one_month'
+    end
+    resources :attendances, only: :update
+  end
 end
