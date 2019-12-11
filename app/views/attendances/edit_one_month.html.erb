@@ -7,8 +7,8 @@
         <tr>
           <th>日付</th>
           <th>曜日</th>
-          <th>出勤時間</th>
-          <th>退勤時間</th>
+          <th>出社</th>
+          <th>退社</th>
           <th>在社時間</th>
           <th>備考</th>
         </tr>
@@ -18,7 +18,35 @@
           <%= f.fields_for "attendances[]", day do |attendance| %>
             <tr>
               <td><%= l(day.worked_on, format: :short) %></td>
-              <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+              <td>
+                 <% if day.worked_on.wday == 1 %>
+                  <%= $days_of_the_week[day.worked_on.wday] %>
+                 <% end %>
+                 
+                 <% if day.worked_on.wday == 2 %>
+                  <%= $days_of_the_week[day.worked_on.wday] %>
+                 <% end %>
+               
+                 <% if day.worked_on.wday == 3 %>
+                  <%= $days_of_the_week[day.worked_on.wday] %>
+                 <% end %>
+                 
+                 <% if day.worked_on.wday == 4 %>
+                  <%= $days_of_the_week[day.worked_on.wday] %>
+                 <% end %>
+                 
+                 <% if day.worked_on.wday == 5 %>
+                  <%= $days_of_the_week[day.worked_on.wday] %>
+                 <% end %>
+                 
+                 <% if day.worked_on.wday == 6 %>
+                  <font color=“blue”><%= $days_of_the_week[day.worked_on.wday] %></font>
+                 <% end %>
+                
+                 <% if day.worked_on.wday == 0 %>
+                  <font color=#F00><%= $days_of_the_week[day.worked_on.wday] %></font>
+                 <% end %>
+              </td>
               <td><%= attendance.time_field :started_at, class: "form-control" %></td>
               <td><%= attendance.time_field :finished_at, class: "form-control" %></td>
               <td>

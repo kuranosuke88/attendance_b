@@ -1,6 +1,8 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 /* ユーザー情報テーブル */
 
@@ -14,6 +16,7 @@
   margin-top: -10px;
   margin-bottom: 10px;
 }
+
 
 /* ユーザー勤怠情報テーブル */
 
@@ -43,7 +46,7 @@
 }
 
 .btn-user--edit {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 /* ユーザー覧ページ */
