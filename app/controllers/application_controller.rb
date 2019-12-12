@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # ユーザーid取得
   
   def set_user
-    @user = User.find_by(params[:id])
+    @user = User.find(params[:id])
   end
   
   # ログイン済ユーザーか確認
