@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :attendances, dependent: :destroy
+  # ユーザー名による絞り込み
+  scope :get_by_name, ->(name) {
+  where("name like ?", "%#{name}%")
+  }
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   
@@ -43,5 +47,4 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-  
 end

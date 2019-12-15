@@ -1,16 +1,20 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i(show edit update destroy edit_basic_info update_basic_info)
+  before_action :set_user, only: %i(show edit update destroy edit_basic_info update_basic_info one_week)
   before_action :logged_in_user, only: %i(index show edit update destroy edit_basic_info update_basic_info)
   before_action :correct_user, only: %i(edit update)
-  before_action :admin_user, only: %i(index destroy edit_basic_info update_basic_info)
+  before_action :admin_user, only: %i(index destroy edit_basic_info update_basic_info edit_one_week)
   before_action :set_one_month, only: %i(show)
+  before_action :set_one_week, only: %i(one_week)
   
   def index
     @users = User.paginate(page: params[:page])
+      if params[:name].present?
+        @users = @users.get_by_name params[:name]
+      end
   end
   
   def show
-    @worked_sum = @attendances.where.not(started_at: nil).count
+    @worked_sum = @attendances.where.not(finished_at: nil).count
   end
   
   def new
@@ -55,7 +59,11 @@ class UsersController < ApplicationController
     else
       flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
     end
-    redirect_to current_user
+    redirect_to @user
+  end
+  
+  def one_week
+    @worked_sum = @attendances.where.not(finished_at: nil).count
   end
   
   private

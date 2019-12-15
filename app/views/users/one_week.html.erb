@@ -3,9 +3,9 @@
   <table class = "table table-bordered table-condensed user-table">
     <tr>
       <td>
-          <%= link_to "◀", user_path(date: @first_day.prev_month), class: "btn btn-info" %>
+          <%= link_to "◀", one_week_user_path(date: @first_day.prev_week), class: "btn btn-info" %>
          【<%= l(@first_day, format: :middle) %>】勤怠管理表
-          <%= link_to "▶", user_path(date: @first_day.next_month), class: "btn btn-info" %>
+          <%= link_to "▶", one_week_user_path(date: @first_day.next_week), class: "btn btn-info" %>
      </td>
       <td>【<%= l(@first_day, format: :middle) %>】勤怠管理表</td>
       <td>指定勤務時間  <%= format_basic_info(@user.work_time) %></td>
@@ -26,8 +26,8 @@
 </div>
 
 <div class="btn-users-show">
-  <%= link_to "勤怠を編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-info" %>
-  <%= link_to "週間表示に切替", one_week_user_path, class: "btn btn-info pull-right" %>
+  <%= link_to "勤怠を編集", attendances_edit_one_week_user_path(date: @first_day), class: "btn btn-info" %>
+  <%= link_to "月間表示に切替", current_user, class: "btn btn-info pull-right" %>
 </div>
 
 <div>
@@ -112,14 +112,14 @@
     <rfoot>
       <!--rowspan:縦結合、colspan:横結合-->
       <tr>
-        <td colspan="4">累計日数</td>
-        <td colspan="4">総合勤務時間</td>
-        <td colspan="4">累計在社時間</td>
+        <td colspan="2">累計日数</td>
+        <td colspan="2">総合勤務時間</td>
+        <td colspan="2">累計在社時間</td>
       </tr>
       <tr>
-        <td colspan="4"><%= @attendances.count %></td>
-        <td colspan="4"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
-        <td colspan="4"><%= format("%.2f", @total_working_times.to_f) %></td>
+        <td colspan="2"><%= @attendances.count %></td>
+        <td colspan="2"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
+        <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
       </tr>
     </rfoot>
   </table>

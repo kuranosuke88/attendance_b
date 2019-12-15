@@ -1,13 +1,27 @@
 <% provide(:title, 'All Users') %>
-<h1>ユーザー覧</h1>
 
+<% if params[:name].present? %>
+  <h1>検索結果</h1>
+<% else %>
+  <h1>ユーザー覧</h1>
+<% end %>
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
+  <div class="pull-right">
+    <%= form_tag(users_path, method: "get") do %>
+    <%= label_tag :name, "ユーザー検索" %><br>
+    <%= text_field_tag :name, params[:name], class: "form-search" %>
+    <%= submit_tag "検索", class: "btn btn-primary" %>
+    <% end %>
+  </div>
   <table class="table table-condensed table-hover" id="table-users">
     <thead>
       <tr>
         <th><%= User.human_attribute_name :name %></th>
-        <th></th>
+        <% if current_user.admin? %>
+          <th class="center"><%= User.human_attribute_name :basic_time %></th>
+          <th class="center"><%= User.human_attribute_name :work_time %></th>
+        <% end %>
       </tr>
     </thead>
     
