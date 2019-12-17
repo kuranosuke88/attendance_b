@@ -85,14 +85,14 @@
               <% end %>
           </td>
           <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td>
-          <td><%= l(day.started_at, format: :minit) if day.started_at.present? %></td>
+          <td><%= day.started_at.min.floor_to(15) if day.started_at.present? %></td>
           <td>
             <% if btn_text = attendance_state_started(day) %>
               <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td><%= l(day.finished_at, format: :hour) if day.finished_at.present? %></td>
-          <td><%= l(day.finished_at, format: :minit) if day.finished_at.present? %></td>
+          <td><%= day.finished_at.min.floor_to(15) if day.finished_at.present? %></td>
           <td>
             <% if btn_text = attendance_state_finished(day) %>
               <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
@@ -100,7 +100,7 @@
           </td>
           <td>
             <% if day.started_at.present? && day.finished_at.present? %>
-              <%= str_times = working_times(day.started_at, day.finished_at) %>
+              <%= str_times = working_times(day.started_at.floor_to(15.minutes), day.finished_at.floor_to(15.minutes)) %>
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
@@ -112,14 +112,14 @@
     <rfoot>
       <!--rowspan:縦結合、colspan:横結合-->
       <tr>
-        <td colspan="2">累計日数</td>
-        <td colspan="2">総合勤務時間</td>
-        <td colspan="2">累計在社時間</td>
+        <td colspan="4">累計日数</td>
+        <td colspan="4">総合勤務時間</td>
+        <td colspan="4">累計在社時間</td>
       </tr>
       <tr>
-        <td colspan="2"><%= @attendances.count %></td>
-        <td colspan="2"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
-        <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
+        <td colspan="4"><%= @attendances.count %></td>
+        <td colspan="4"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
+        <td colspan="4"><%= format("%.2f", @total_working_times.to_f) %></td>
       </tr>
     </rfoot>
   </table>
