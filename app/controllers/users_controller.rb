@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: %i(index destroy edit_basic_info update_basic_info edit_one_week)
   before_action :set_one_month, only: %i(show)
   before_action :set_one_week, only: %i(one_week)
-  before_action :admin_or_correct_user, only: %i(show)
+  before_action :admin_or_correct_user, only: %i(show one_week)
   
   def index
     @users = User.paginate(page: params[:page])
