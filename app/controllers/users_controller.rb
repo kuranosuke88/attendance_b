@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: %i(index destroy edit_basic_info update_basic_info edit_one_week)
   before_action :set_one_month, only: %i(show)
   before_action :set_one_week, only: %i(one_week)
+  before_action :admin_or_correct_user, only: %i(show)
   
   def index
     @users = User.paginate(page: params[:page])
@@ -74,5 +75,13 @@ class UsersController < ApplicationController
     
     def basic_info_params
        params.require(:user).permit(:department, :basic_time, :work_time)
+    end
+    
+    def admin_or_correct_user
+      @user = User.find(params[:user_id]) if @user.blank?
+      unless current_user?(@user) || current_user.admin?
+        flash[:danger] = "編集権限がありません。"
+        redirect_to(root_url)
+      end
     end
 end
