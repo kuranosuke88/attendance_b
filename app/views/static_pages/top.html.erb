@@ -4,3 +4,9 @@
     <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
     <P>アカウントの作成は<%= link_to "こちら", signup_path %></P>
 </div>
+
+<div class="center jumbotron">
+  <p>動作確認は↓からどうぞ</p>
+  <%= link_to "管理者権限ログイン", login_path, method: :patch, class: "btn btn-lg btn-primary" %>
+  <%= link_to "一般権限ログイン", login_path, method: :put, class: "btn btn-lg btn-primary" %>
+</div>

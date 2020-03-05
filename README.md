@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+勤怠管理アプリケーションです。
+ボタンを押した日時刻で勤怠管理を自動化しています。
 
-Things you may want to cover:
+「ボタンを押す」「入力・編集・更新する」などお試しください。
+編集・更新時のパスワードは未入力でも更新されるように実装してあります。
 
-* Ruby version
+ログアウトすることでトップページに戻ります。
 
-* System dependencies
 
-* Configuration
+【一般者権限&共通機能】
 
-* Database creation
+勤怠管理表月間切替機能
+出退勤時刻自動入力機能
+出勤日数自動計算機能
+在社時間自動計算機能
+総合勤務時間自動計算機能
+累計在社時間自動計算機能
+勤怠時刻編集機能
+週間、月間表示切替機能
+自分用アカウント情報更新機能
 
-* Database initialization
+【管理者権限機能】
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+各ユーザー検索機能
+各ユーザー一覧機能
+各ユーザー基本情報編集機能
+各ユーザー削除機能
+各ユーザー勤怠状況確認機能
+各ユーザー勤怠時刻編集機能
